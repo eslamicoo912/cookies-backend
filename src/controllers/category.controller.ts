@@ -3,6 +3,15 @@ import CategoryModel from "../database/models/category.model.js";
 import { asyncHandeller } from "../utils/errorHandling.js";
 import { Request, Response } from "express";
 
+const defaultCategoriesList = [
+  'Cookies',
+'Mini Cookies',
+'Cooki dough',
+'Gift', 
+'Party',
+'Special order',
+];
+
 export const createCategory = asyncHandeller(
   async (req: Request, res: Response) => {
     const { name } = req.body;
@@ -13,8 +22,19 @@ export const createCategory = asyncHandeller(
 
 export const getAllCategories = asyncHandeller(
   async (_req: Request, res: Response) => {
+    // Fetch categories from the database
     const categories = await CategoryModel.find();
-    return res.status(200).json({ message: "success", data: categories });
+
+    // If no categories exist, insert the default ones
+    if (categories.length === 0) {
+      const defaultCategories = defaultCategoriesList.map((name) => ({ name }));
+      await CategoryModel.insertMany(defaultCategories);
+    }
+
+    // Fetch the updated categories after insertion
+    const updatedCategories = await CategoryModel.find();
+
+    return res.status(200).json({ message: "success", data: updatedCategories });
   }
 );
 
