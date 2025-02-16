@@ -6,7 +6,7 @@ export const createOrUpdateProductSchema = Joi.object({
     name: Joi.string().required(),
     description: Joi.string().required(),
     image: Joi.string().required(),
-    prices: Joi.array().required(),
+    prices: Joi.array(),
     category: Joi.string().required(),
   }),
   query: Joi.object({

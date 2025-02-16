@@ -8,7 +8,7 @@ export const createProcuct = asyncHandeller(
   async (req: Request, res: Response) => {
     console.log("req.body", req.body);
     
-    const { name, description, prices, image, category }: ProductType = req.body;
+    const { name, description, prices, mainPrice, image, category }: ProductType = req.body;
     const product: ProductType | null = await ProductModel.findOne({ name });
     if (product) {
       return res.status(400).json({ message: "Product already exists" });
@@ -25,6 +25,7 @@ export const createProcuct = asyncHandeller(
       description,
       image: productImage || image,
       prices,
+      mainPrice,
       category
     });
 

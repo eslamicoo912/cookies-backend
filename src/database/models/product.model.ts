@@ -4,11 +4,12 @@ const productSchema = new Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
   image: { type: String, required: true },
+  mainPrice: { type: Number },
   prices: {
-    boxOfthree: { type: Number, required: true },
-    boxOfsix: { type: Number, required: true },
-    boxOftwelve: { type: Number, required: true },
-    customPrice: { type: Number, required: true },
+    boxOfthree: { type: Number },
+    boxOfsix: { type: Number },
+    boxOftwelve: { type: Number },
+    customPrice: { type: Number },
   },
   category: { type: String, required: true },
 });

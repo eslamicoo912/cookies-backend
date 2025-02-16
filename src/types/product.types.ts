@@ -2,7 +2,8 @@ export type ProductType = {
   name: string;
   description: string;
   image: string;
-  prices: {
+  mainPrice?: number;
+  prices?: {
     boxOfthree: number;
     boxOfsix: number;
     boxOftwelve: number;
